@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--
+    © 2016 SABA SOBHANI & HUNTER CARON
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MARKED.SITE</title>
+        <link rel='stylesheet' href="css/styles.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:url" content="http://marked.site/" />
+        <meta property="og:site_name" content="MARKED.SITE" />
+        <meta property="og:title" content="Make Your Mark" />
+        <meta property="og:description" content="Make your mark on a canvas that stretches across the globe. MARKED.SITE turns the machine to canvas, and facilitates a massive art experiment." />
+        <meta property="og:image" content="http://marked.site/otherImages/facebook.png" />
+        <meta name="description" content="Make your mark on a canvas that stretches across the globe. MARKED.SITE turns the machine to canvas, and facilitates a massive art experiment.">
+        <meta name="author" content="Saba Sobhani &amp; Hunter Caron">
+        <meta name="keywords" content="design art experiment marked site drawing draw doodle sketch saba sobhani hunter caron ">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@hunterhcaron">
+        <meta name="twitter:creator" content="@sabasob">
+        <meta name="twitter:title" content="MARKED.SITE">
+        <meta name="twitter:description" content="Make your mark on a canvas that stretches across the globe. MARKED.SITE turns the machine to canvas, and facilitates a massive art experiment.">
+        <meta name="twitter:image" content="http://marked.site/otherImages/facebook.png">
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-60215266-2', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body class="noScroll">
+        <div class="splash">
+            <h2 class="title"><span class="click">Please Click Here</span> <br>To Make Your Mark</h2>
+            <p class="info">MARKED.SITE </p>
+        </div>
+
+        <div class="canvas-side">
+            <div class="drawing-pad">
+                <canvas id="myCanvas" width="600" height="600"></canvas>
+                <div class="buttons">
+                    <button class="clear button">Restart
+                    </button>
+                    <button class="submit button">
+                        Submit
+                        <div class="green">
+                            sent
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="live-side">
+
+        </div>
+        <footer>
+            <div class="feed-title footer-box">
+                <a id="back" class="button p-button bottom-link" href="feed.html">See more on The Feed.</a>
+            </div>
+        </footer>
+
+        <p id="count">5329</p>
+        <script src="js/jquery-2.2.1.min.js"></script>
+        <script src="js/jquery.unveil.js"></script>
+        <script>
+            // Welcome to some disgusting code,
+            // enjoy your stay.
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+            var live = document.querySelector(".live-side");
+
+            var prompts = ["A Banana Cluster","A Cat","An Eyeball","A Snake","A Ring","A Dog","A Glass","An Eyebrow","‘Damn Daniel’","A Polar bear","A Carton","A Skateboard","A Super Hero","A Butterfly","A Lion","A Burger","A Box of French Fries","A Scoop of Ice Cream","The Sun","The Moon","Saturn","A Comb","A Tennis racket","A Raccoon","A Whale","A Dolphin","A Meteorite","A Bus","A Helicopter","A Water bottle","A Balloon","A Snowman","An Igloo","A Panda","A Spaceship","A Pencil","A Cow","A Boat","A Button","A Goat","A House","A Scooter","A Shoe","A Box of Chinese Food","A Pizza Slice","A Tie","A Bucket","A Truck","A Penguin","A Cloud","A Plug","A Lightbulb","A Paper Airplane","A Cube","A Basketball","An Elastic","A Bracelet","A Watch","A Mitten","A Mint","A Piece of Gum","A Cup of Coffee","A Mouse","A Pair of Binoculars","A Tongue","A Moose","A Pancake Stack","A Syrup Dispenser","A Shoelace","Future","An Owl","A Pie","A Can","A Pair of Sunglasses","A Cheesestick","A Pistachio","Yourself","Your best friend","Kanye West","Jordan Childs","A Tunnel","A Walnut","A Camera","A Marker","A Clock","A Bed","A Radio","A Corn Farm","A Convenience store","A Gate","A Key","A Guitar","A Piano","A Trumpet","A Trombone","A Sock","A Socket","A Pair of Pyjamas","A Pair of Jeans","A T-Shirt","A Plane","Superman","A Giraffe","A House Hippo","A Hippo","Your Thumb","A Cigarette","An Orange","Obama","A Fork","A Spoon","A Knife","A Steak","A Potato","A Ruler","A Carrot","A Tomato","A Loaf of Bread","A Wheel","A Wheat Stock","A Printer","A Ball","A Plaid Shirt","A Suitcase","An Umbrella","An Eyeball","A Zebra","Play Tic-Tac-Toe","A Loo","A Camel","A Milk Carton","A Soccer ball","A Hammer","An Anvil","Yourself","A Cookie","A Cake","A Chocolate Bar","A Frog","A Van","A Flamingo","A Picnic Table","A Jacket","A Light Switch","A Microphone","A Snare Drum","An Octopus","A Jellyfish","A Watermelon","Your Breakfast","Your Lunch","Your Dinner"];
+            var prompt = "";
+
+            var frames = 0;
+            var count = 0;
+            var mouseX = 0;
+            var mouseY = 0;
+            var mouseDown = 0;
+            var prevX = 0;
+            var prevY = 0;
+            var length = 0;
+            var count = 0;
+            var addition = 0;
+            var isMouseDown = false;
+            var blank = true;
+            var startTouch = false;
+            var firstDraw = true;
+            var fontsLoaded = false;
+            var splashGone = false;
+
+
+            // loading the webfont here in order to have
+            // a load event to trigger drawing the text
+            // on the canvas
+            WebFontConfig = {
+                custom: {
+                    families: ['Neuze'],
+                    urls: ['css/styles.css']
+                },
+                active: function () {drawCommand(); }
+              };
+              (function() {
+                var wf = document.createElement('script');
+                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+              })();
+
+
+            function getRanNum(min, max) {
+                return Math.round(Math.random() * (max - min) + min);
+            }
+
+            function updateCount() {
+                count = parseInt(document.getElementById('count').innerHTML);
+                count = count + addition;
+            }
+
+            function updateLive() {
+                var addImages = live.innerHTML;
+                for (var i = count-200; i < count; i++) {
+                    addImages = '<div class="img-box"><img data-src="images/'
+                    + i + '.png"/></div>' + addImages;
+                }
+                live.innerHTML = addImages;
+                $("img").unveil(50);
+            }
+
+            function addLive() {
+                live.innerHTML = '<div class="img-box"><img src="images/'
+                + (count-1) + '.png"/></div>' + live.innerHTML;
+            }
+
+            function confirmSend() {
+                $('.green').addClass('show-green')
+
+                setTimeout(function() {
+                    $('.green').removeClass('show-green')
+                }, 1500);
+            }
+
+            $('.submit').click(function() {
+                saveImage();
+                clearCanvas();
+                drawCommand();
+            });
+
+            $('.clear').click(function() {
+                clearCanvas();
+            });
+
+            $( ".title" ).click(function(){
+                $( ".splash" ).fadeOut("fast");
+                splashGone = true;
+                $("body").removeClass("noScroll");
+            });
+
+            setTimeout(function() {
+                updateLive();
+            }, 1000);
+
+
+            function clearCanvas() {
+                console.log("clearing canvas");
+                ctx.clearRect(0, 0, 600, 600);
+                blank = true;
+            }
+
+            function drawCommand() {
+                updateCount();
+                console.log("drawing command");
+                ctx.textAlign = "center";
+                ctx.fillStyle = "#333";
+                ctx.font = "48px Neuze, Montserrat, Gotham, Proxima Nova, Helvetica, Arial";
+                ctx.fillText("Submissions Closed.", 300, 80);
+                //ctx.fillText(grabPrompt(), 300, 150);
+
+                if (window.innerWidth <= 650)   {
+                    ctx.font = "24px Neuze, Montserrat, Gotham, Proxima Nova, Helvetica, Arial";
+                } else {
+                    ctx.font = "18px Neuze, Montserrat, Gotham, Proxima Nova, Helvetica, Arial";
+                }
+                if (firstDraw == false) {
+                    ctx.fillText("scroll down to see other drawings", 300, 568);
+                }
+                blank = true;
+            }
+
+
+
+            function grabPrompt() {
+                var r = getRanNum(0, prompts.length-1);
+                prompt = prompts[r];
+                return prompt;
+            }
+
+
+
+            //drawing function
+            function draw() {
+
+                frames++;
+
+                ctx.strokeStyle = "#666";
+                ctx.fillStyle = "#000";
+                ctx.lineJoin = "round";
+                ctx.lineCap = "round";
+                ctx.lineWidth = 4;
+                ctx.globalCompositeOperation = 'destination-over';
+
+                if (isMouseDown) {
+                    if (blank == true  && splashGone == true) {
+                        clearCanvas();
+                        length = 0;
+                    }
+                    firstDraw = false;
+
+                    //console.log(mouseX + " " + prevX + " " + isMouseDown);
+                    ctx.beginPath();
+                    ctx.moveTo(prevX,prevY);
+                    ctx.lineTo(mouseX,mouseY);
+                    ctx.stroke();
+
+                    length += (Math.abs(mouseX-prevX) + Math.abs(mouseY-prevY));
+                    if (length > 3) {
+                        blank = false;
+                    }
+                    prevX = mouseX;
+                    prevY = mouseY;
+                }
+
+                window.requestAnimationFrame(draw);
+            }
+
+            window.requestAnimationFrame(draw);
+
+
+        </script>
+    </body>
+</html>

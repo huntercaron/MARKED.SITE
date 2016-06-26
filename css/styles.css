@@ -1,0 +1,473 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+@font-face {
+    font-family: 'Neuze';
+    src:    url("NeuzeitSLT-BookHeavy.woff2") format('woff2'),
+            url("NeuzeitSLT-BookHeavy.woff") format('woff');
+}
+
+
+body {
+    font-family: 'Neuze', 'Montserrat', Helvetica, Arial, sans-serif !important;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+
+    background-color: #FFF0DC;
+}
+
+.noScroll {
+    overflow: hidden;
+}
+
+.canvas-side {
+    height: 100vh;
+    margin: 0;
+    flex: 2;
+    background-color: #FFF0DC;
+
+    display: -webkit-flex;
+    display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+
+}
+
+canvas {
+    box-shadow: 0 10px 48px rgba(0,0,0,0.20), 0 10px 10px rgba(0,0,0,0.12);
+    background-color: #FFF0DC;
+    cursor: crosshair;
+    margin: 0 auto;
+    margin-right: 0 !important;
+}
+
+.buttons {
+    width: 100%;
+    margin: 40px auto;
+}
+
+.button {
+    cursor: pointer;
+    top: calc(50% - 100px);
+    font-family: 'Neuze';
+    position: relative;
+
+    background: none;
+    color: #333;
+    font-size: 2.2em;
+
+    width: 40%;
+    float: left;
+    margin: 0;
+    box-sizing: border-box;
+    height: 60px;
+    border: none;
+
+    outline:0;
+    margin: 0 5%;
+
+
+    display: inline-block;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+
+}
+
+.button::after {
+    content:"";
+    position: absolute;
+    width: 50%;
+    height: 4px;
+    left: 25%;
+    bottom: 4px;
+    background-color: #333;
+
+    opacity: 0;
+}
+
+.button:hover::after {
+    opacity: 1;
+
+}
+
+.submit {
+    overflow: hidden;
+    position: relative;
+}
+
+.green {
+    z-index: 20;
+    width: 50%;
+    left: 25%;
+    height: 100%;
+    background-color: #FFF0DC;
+    position: absolute;
+    border-top: 4px solid #333;
+    top: 0;
+    color: #333;
+    padding-top: 0px;
+
+    transform: translateY(80px);
+
+    -webkit-transition:all .3s ease-out;
+    -moz-transition:all .3s ease-out;
+    transition:all .3s ease-out
+
+    -webkit-align-items: center;
+            align-items: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+}
+
+.green.show-green {
+    transform: translateY(0);
+
+
+
+    -webkit-transition:all .2s ease-in-out;
+    -moz-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+
+}
+
+.green svg {
+    margin-top: 5px;
+    transform: scale(1.3);
+}
+
+#check {
+    fill: white;
+}
+
+.clear:hover {
+
+}
+
+.clear:active {
+    color: salmon;
+
+
+}
+.clear:active::after {
+    background-color: salmon;
+
+}
+
+.submit:hover {
+
+}
+
+.submit:active {
+    color: #666;
+}
+
+.submit:active::after {
+    background-color: #666;
+}
+
+.drawing-pad {
+    position: relative;
+    width: 600px;
+
+}
+
+#count {
+    display: none;
+}
+
+.img-box {
+    overflow: hidden;
+    float: left;
+    width: 20%;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.live-side {
+    flex: 1;
+
+
+    background-color: #FFF5E8;
+}
+
+
+/*SPLASH*/
+
+.splash {
+    color: #333;
+    position: fixed;
+    padding: 40px;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    overflow: none;
+    background-color: #FFF0DC;
+    text-align: center;
+}
+
+.click {
+    border-bottom: 0.09em solid #333;
+    cursor: pointer;
+}
+
+.click:hover {
+    border: none;
+}
+
+
+h2 {
+    margin-top: 50px;
+    width: 100%;
+    font-size: 6.5em;
+    line-height: 1.4;
+}
+
+.info {
+    line-height: 1.5;
+    bottom: 20px;
+    font-size: 1.2em;
+    padding: 30px;
+    width: 80%;
+    max-width: 500px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.info::after {
+    content: "turns the machine to canvas, and facilitates a massive art experiment.";
+}
+
+.info:hover::after {
+    content: "is an experiment by Saba Sobhani & Hunter Caron";
+
+}
+
+.info:hover {
+    max-width: 350px;
+}
+
+.names {
+    line-height: 1.5;
+    bottom: 60px;
+    font-size: 1.2em;
+    width: 80%;
+    max-width: 500px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40vh;
+    background-color: #FFF0DC;
+    display: none;
+
+
+}
+
+/* FEED PAGE */
+
+.feed-title {
+    text-align: center;
+    padding-bottom: 60px;
+    width: 80%;
+    margin: auto;
+}
+
+.p-button {
+    text-decoration: none;
+}
+
+.p-button:active {
+    color: #aaa;
+}
+
+.p-button:active::after {
+    background-color: #aaa;
+}
+
+.p-button.disabled {
+    text-decoration: line-through;
+    color: #aaa;
+    cursor: default;
+}
+
+.p-button.disabled::after {
+    text-decoration: line-through;
+    color: #aaa;
+    display: none;
+}
+
+.bottom-link {
+    width: 100%;
+    margin-top: 100px;
+    margin-left: 0;
+}
+
+
+footer {
+    padding: 60px 0;
+}
+
+.loading {
+    padding-bottom: 300px;
+}
+
+@media (max-width: 650px) {
+
+
+    h2, .names {
+        font-size: 4.5em;
+    }
+
+
+
+    .info {
+
+
+    }
+
+    .drawing-pad {
+        width: 300px;
+        margin-bottom: 150px;
+
+    }
+
+    .img-box {
+        overflow: hidden;
+        float: left;
+        width: 33%;
+    }
+
+    .submit {
+
+    }
+
+    .buttons {
+        margin-top: 20px;
+
+    }
+
+
+
+
+    .canvas-side {
+        width: 100vw;
+        padding-top: 40px;
+    }
+
+
+    canvas {
+        cursor: crosshair;
+        margin: auto;
+        width: 300px;
+        height: 300px;
+    }
+
+    .live-side {
+
+
+        width: 100vw;
+        height: auto;
+        overflow: auto;
+    }
+
+    .button {
+        font-size: 1.9em;
+    }
+}
+
+@media (max-height: 850px){
+    h2 {
+        font-size: 4.5em;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .green {
+        width: 90%;
+        left: 5%;
+    }
+
+    .button::after {
+
+        width: 90%;
+
+        left: 5%;
+    }
+
+    .button {
+        font-size: 1.7em;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        margin-top: 20px;
+    }
+
+    .info, .names {
+        bottom:0px;
+        font-size: 1em;
+    }
+}

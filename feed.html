@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+    © 2016 SABA SOBHANI & HUNTER CARON
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MARKED.SITE - Feed</title>
+        <link rel='stylesheet' href="css/styles.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:url" content="http://marked.site/" />
+        <meta property="og:site_name" content="MARKED.SITE" />
+        <meta property="og:title" content="Make Your Mark" />
+        <meta property="og:description" content="Make your mark on a canvas that stretches across the globe. MARKED.SITE turns the machine to canvas, and facilitates a massive art experiment." />
+        <meta property="og:image" content="http://marked.site/otherImages/facebook.png" />
+        <meta name="description" content="Make your mark on a canvas that stretches across the globe. MARKED.SITE turns the machine to canvas, and facilitates a massive art experiment.">
+        <meta name="author" content="Saba Sobhani &amp; Hunter Caron">
+        <meta name="keywords" content="design art experiment marked site drawing draw doodle sketch saba sobhani hunter caron ">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@hunterhcaron">
+        <meta name="twitter:creator" content="@sabasob">
+        <meta name="twitter:title" content="MARKED.SITE">
+        <meta name="twitter:description" content="Make your mark on a canvas that stretches across the globe. MARKED.SITE turns the machine to canvas, and facilitates a massive art experiment.">
+        <meta name="twitter:image" content="http://marked.site/otherImages/facebook.png">
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-60215266-2', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div class="feed-title" id="feed">
+            <h2 class="title">The Feed (<span id='page'>1</span>)</h2>
+            <h2 class="title loading">is loading...</h2>
+            <p id="count">5329</p>
+        </div>
+        <div class="live-side">
+
+        </div>
+        <footer>
+            <div class="feed-title footer-box">
+                <a id="prev" class="button p-button" href="#feed">Prev Page</a>
+                <a id="next" class="button p-button" href="#feed">Next Page</a>
+                <a id="back" class="button p-button bottom-link" href="/">Back to MARKED.SITE</a>
+            </div>
+        </footer>
+
+        <script src="js/jquery-2.2.1.min.js"></script>
+        <script src="js/jquery.unveil.js"></script>
+        <script>
+            // Welcome to some disgusting code,
+            // enjoy your stay.
+            var live = document.querySelector(".live-side");
+
+            var frames = 0;
+            var count = 0;
+            var mouseX = 0;
+            var mouseY = 0;
+            var mouseDown = 0;
+            var prevX = 0;
+            var prevY = 0;
+            var length = 0;
+            var count = 0;
+            var addition = 0;
+            var isMouseDown = false;
+            var blank = true;
+            var startTouch = false;
+            var firstDraw = true;
+            var fontsLoaded = false;
+            var splashGone = false;
+
+            var pageNumber = 1;
+            var pageLimit = 1;
+
+
+            // loading the webfont here in order to have
+            // a load event to trigger drawing the text
+            // on the canvas
+            WebFontConfig = {
+                custom: {
+                    families: ['Neuze'],
+                    urls: ['css/styles.css']
+                }
+              };
+              (function() {
+                var wf = document.createElement('script');
+                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+              })();
+
+
+            function getRanNum(min, max) {
+                return Math.round(Math.random() * (max - min) + min);
+            }
+
+            function updateCount() {
+                count = parseInt(document.getElementById('count').innerHTML);
+                count = count + addition;
+            }
+
+            function updateLive() {
+                var addImages = live.innerHTML;
+                pageLimit = Math.ceil(count/200);
+                console.log((200*(pageNumber-1)));
+                for (var i = count-(200 + 200*(pageNumber-1)); i < count-(200*(pageNumber-1)); i++) {
+                    if (i > 0) {
+                        addImages = '<div class="img-box"><img data-src="images/'
+                        + i + '.png"/></div>' + addImages;
+                    }
+                }
+                live.innerHTML = addImages;
+                addImages = "";
+                $("img").unveil();
+            }
+
+            function addLive() {
+                live.innerHTML = '<div class="img-box"><img src="images/'
+                + (count-1) + '.png"/></div>' + live.innerHTML;
+            }
+
+            function calcPage() {
+                if (pageNumber == 1) {
+                    $('#prev').addClass("disabled");
+                } else {
+                    $('#prev').removeClass("disabled");
+                }
+                if (!((pageNumber) < pageLimit)) {
+                    $('#next').addClass("disabled");
+                } else {
+                    $('#next').removeClass("disabled");
+                }
+            }
+
+            $('#next').click(function() {
+                if ((pageNumber) < pageLimit)   {
+                    pageNumber++;
+                    calcPage();
+                    $('#page').text(pageNumber);
+                    live.innerHTML = " ";
+                    updateLive();
+
+                    console.log((pageNumber));
+                }
+            });
+
+            $('#prev').click(function() {
+                if (!((pageNumber) < pageLimit))   {
+                    pageNumber--;
+                    calcPage();
+                    $('#page').text(pageNumber);
+                    live.innerHTML = " ";
+                    updateLive();
+
+                    console.log((pageNumber));
+                }
+            });
+
+            setTimeout(function() {
+                $('.loading').remove();
+                updateCount();
+                updateLive();
+                calcPage();
+            }, 1000);
+
+
+
+
+        </script>
+    </body>
+</html>
