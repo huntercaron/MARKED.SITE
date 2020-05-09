@@ -71,7 +71,6 @@ body {
 .canvas-side {
     height: 100vh;
     margin: 0;
-    flex: 2;
     background-color: #FFF0DC;
 
     display: -webkit-flex;
